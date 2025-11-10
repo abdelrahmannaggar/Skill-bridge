@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Plans | Skill Bridge</title>
+    <link rel="stylesheet" href="css/style22.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .plans-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+
+        .plans-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .plans-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .plans-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .plan-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .plan-card.featured {
+            border: 2px solid var(--accent-color);
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .plan-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .plan-header h4 {
+            color: #666;
+            font-size: 1rem;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .plan-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #444;
+        }
+
+        .plan-features i {
+            color: var(--accent-color);
+        }
+
+        /* Remove modal styles and keep only payment section styles */
+        .payment-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .payment-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .selected-plan-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .selected-plan-summary h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .payment-methods-container {
+            padding: 20px;
+        }
+
+        .payment-methods-container h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: var(--accent-color);
+        }
+
+        .payment-method input {
+            display: none;
+        }
+
+        .payment-method input:checked + label {
+            color: var(--accent-color);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .payment-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .complete-payment {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .payment-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          Skill<span class="logo-accent">Bridge</span>
+        </a>
+      </div>
+      <div class="main-menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="#">Surfaces</a>
+            <div class="dropdown-content">
+              <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+              <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+              <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+            </div>
+          </li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li id="auth-buttons">
+            <a href="signup.html" class="btn" id="signup-btn"><i class="fas fa-user"></i> Sign Up</a>
+            <a href="login.html" class="btn" id="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+          </li>
+        </ul>
+      </div>
+      <button class="hamburger-button">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+      </button>
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <button type="button" class="close-sidebar">&times;</button>
+        </div>
+        <div class="sidebar-content">
+          <div class="menu-section">
+            <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+            <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+            <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+            <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+            <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+            <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+            <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+            <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+            <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+          </div>
+          <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+          <div class="menu-section support-section">
+            <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+            <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+            <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+            <a href="#" class="signout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <!-- Main Content -->
+    <main class="plans-container">
+        <div class="plans-header">
+            <h1 class="plans-title">Choose Your Plan</h1>
+            <p class="plans-subtitle">Select the perfect plan to enhance your learning journey</p>
+        </div>
+
+        <div class="plans-grid">
+            <div class="plan-card">
+                <div class="plan-header">
+                    <h3>Basic Plan</h3>
+                    <h4>Ideal for individuals eager to explore and start learning</h4>
+                    <div class="price">💵 EGP 349<span>/ 3 months</span></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> 🔄 Join up to 3 Skill Swaps within 3 months</li>
+                    <li><i class="fas fa-check"></i> 📅 Access to Upcoming Events & Webinars</li>
+                    <li><i class="fas fa-check"></i> 💬 Limited Messaging (5 conversations/month)</li>
+                    <li><i class="fas fa-check"></i> 📧 Email Support</li>
+                </ul>
+                <button class="btn btn-outline plan-select" data-plan="Basic">Select Plan</button>
+            </div>
+
+            <div class="plan-card featured">
+                <div class="plan-header">
+                    <h3>Pro Plan</h3>
+                    <h4>Designed for committed learners and active community members</h4>
+                    <div class="price">💵 EGP 749<span>/ 6 months</span></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> 📚 Unlimited Access to Online Tutorials</li>
+                    <li><i class="fas fa-check"></i> 🔄 Join up to 10 Skill Swaps within 6 months</li>
+                    <li><i class="fas fa-check"></i> 💬 Unlimited Messaging</li>
+                    <li><i class="fas fa-check"></i> 📅 Early Access to Upcoming Events</li>
+                </ul>
+                <button class="btn btn-primary plan-select" data-plan="Pro">Select Plan</button>
+            </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-section" style="display: none;">
+            <h2 class="section-title">Complete Your Payment</h2>
+            <div class="payment-container">
+                <div class="selected-plan-summary">
+                    <h3>Selected Plan</h3>
+                    <div id="plan-summary"></div>
+                </div>
+
+                <div class="payment-methods-container">
+                    <h3>Select Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" name="payment-method" id="credit-card" value="credit-card" required>
+                            <label for="credit-card">
+                                <i class="fas fa-credit-card"></i>
+                                <div>Credit Card</div>
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" name="payment-method" id="paypal" value="paypal">
+                            <label for="paypal">
+                                <i class="fab fa-paypal"></i>
+                                <div>PayPal</div>
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" name="payment-method" id="vodafone-cash" value="vodafone-cash">
+                            <label for="vodafone-cash">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div>Vodafone Cash</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Details -->
+                    <div id="card-type-group" class="payment-details" style="display: none;">
+                        <h4>Select Card Type</h4>
+                        <select id="card-type" class="form-control">
+                            <option value="">Select a card type</option>
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="amex">American Express</option>
+                        </select>
+                    </div>
+
+                    <div id="card-fields" class="payment-details" style="display: none;">
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry-date">Expiry Date</label>
+                                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Name on Card</label>
+                            <input type="text" id="card-name" name="card-name" placeholder="John Doe">
+                        </div>
+                    </div>
+
+                    <div id="paypal-info" class="payment-details" style="display: none;">
+                        <p>You will be redirected to PayPal to complete your payment.</p>
+                    </div>
+
+                    <div id="vodafone-info" class="payment-details" style="display: none;">
+                        <p>Please use your Vodafone Cash app to complete the payment.</p>
+                        <div class="form-group">
+                            <label for="vodafone-number">Vodafone Cash Number</label>
+                            <input type="text" id="vodafone-number" name="vodafone-number" placeholder="Enter your Vodafone Cash number">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary complete-payment">Complete Payment</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Processing Animation and Confirmation -->
+    <div class="processing-animation" style="display: none; text-align: center; padding: 20px;">
+        <div class="processing-spinner" style="width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+        <p class="processing-text" style="color: #666; font-size: 1.1rem;">Processing your payment...</p>
+    </div>
+
+    <div class="subscription-confirmation" style="display: none; text-align: center; padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); margin-top: 40px;">
+        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745; margin-bottom: 20px;"></i>
+        <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 15px;">Subscription Successful!</h2>
+        <p style="color: #666; margin-bottom: 30px;">Thank you for subscribing to Skill Bridge. Your account has been upgraded.</p>
+        
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px auto; max-width: 400px; text-align: left;">
+            <h4 style="color: var(--primary-color); margin-bottom: 15px;">Transaction Details</h4>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                <span style="color: #666;">Transaction ID</span>
+                <span style="font-weight: 500;" id="transaction-id"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                <span style="color: #666;">Plan</span>
+                <span style="font-weight: 500;" id="transaction-plan"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                <span style="color: #666;">Amount</span>
+                <span style="font-weight: 500;" id="transaction-amount"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                <span style="color: #666;">Payment Method</span>
+                <span style="font-weight: 500;" id="transaction-method"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                <span style="color: #666;">Date</span>
+                <span style="font-weight: 500;" id="transaction-date"></span>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="window.location.href='index.html'">Continue to Dashboard</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div>
+              <a href="index.html">
+                <div class="logo">Skill<span class="logo-accent">Bridge</span></div>
+              </a>
+              <div class="newsletter-section">
+                <h4>Subscribe to Newsletter</h4>
+                <p class="text-sm">
+                  Subscribe now to receive tips on how to take your skills to
+                  the next level.
+                </p>
+                <form>
+                  <input type="email" id="newsletter-email" placeholder="Enter your email" />
+                  <button type="submit" class="btn btn-primary btn-block">
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+              <div class="social-icons">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+            <div>
+              <h4>Company</h4>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Our Process</a></li>
+                <li><a href="#">Join Our Team</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Resources</h4>
+              <ul>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Research</a></li>
+                <li><a href="#">Recent Projects</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Contact</h4>
+              <ul>
+                <li>
+                  <a href="#">skill.bridge.supprt@gmail.com</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    
+      
+      <div class="footer-copyright">
+        &copy; 2025 Skill Bridge. All rights reserved.
+      </div>
+      </div>
+      </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const signupBtn = document.getElementById('signup-btn');
+            const loginBtn = document.getElementById('login-btn');
+            const signoutBtn = document.querySelector('.signout-btn');
+
+            if (token) {
+                // User is logged in
+                signupBtn.style.display = 'none';
+                loginBtn.style.display = 'none';
+                signoutBtn.style.display = 'inline-block';
+            } else {
+                // User is not logged in
+                signupBtn.style.display = 'inline-block';
+                loginBtn.style.display = 'inline-block';
+                signoutBtn.style.display = 'none';
+            }
+        });
+
+        // Payment section functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const paymentSection = document.querySelector('.payment-section');
+            const planSummary = document.getElementById('plan-summary');
+            const methodButtons = document.querySelectorAll('input[name="payment-method"]');
+            const cardTypeGroup = document.getElementById('card-type-group');
+            const cardFields = document.getElementById('card-fields');
+            const cardTypeSelect = document.getElementById('card-type');
+            const paypalInfo = document.getElementById('paypal-info');
+            const vodafoneInfo = document.getElementById('vodafone-info');
+            let selectedPlan = null;
+
+            // Plan selection
+            document.querySelectorAll('.plan-select').forEach(button => {
+                button.addEventListener('click', () => {
+                    const planCard = button.closest('.plan-card');
+                    const planName = planCard.querySelector('h3').textContent;
+                    const planPrice = planCard.querySelector('.price').textContent;
+                    const planFeatures = Array.from(planCard.querySelectorAll('.plan-features li'))
+                        .map(li => li.textContent.trim());
+
+                    // Set the selected plan
+                    selectedPlan = planName;
+
+                    // Update plan summary
+                    planSummary.innerHTML = `
+                        <h4>${planName}</h4>
+                        <p class="price">${planPrice}</p>
+                        <ul class="selected-features">
+                            ${planFeatures.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                    `;
+
+                    // Show payment section
+                    paymentSection.style.display = 'block';
+                    paymentSection.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Payment method selection
+            methodButtons.forEach(button => {
+                button.addEventListener('change', (e) => {
+                    // Hide all method groups
+                    cardTypeGroup.style.display = 'none';
+                    cardFields.style.display = 'none';
+                    paypalInfo.style.display = 'none';
+                    vodafoneInfo.style.display = 'none';
+
+                    // Show selected method group
+                    if (e.target.value === 'credit-card') {
+                        cardTypeGroup.style.display = 'block';
+                    } else if (e.target.value === 'paypal') {
+                        paypalInfo.style.display = 'block';
+                    } else if (e.target.value === 'vodafone-cash') {
+                        vodafoneInfo.style.display = 'block';
+                    }
+                });
+            });
+
+            // Card type selection
+            cardTypeSelect.addEventListener('change', () => {
+                cardFields.style.display = cardTypeSelect.value ? 'block' : 'none';
+            });
+
+            // Format card number with spaces
+            const cardNumber = document.getElementById('card-number');
+            cardNumber.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                e.target.value = formattedValue;
+            });
+
+            // Format expiry date
+            const expiryDate = document.getElementById('expiry-date');
+            expiryDate.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                if (value.length >= 2) {
+                    value = value.slice(0, 2) + '/' + value.slice(2);
+                }
+                e.target.value = value;
+            });
+
+            // Validate expiry date
+            function isValidExpiryDate(expiryDate) {
+                const [month, year] = expiryDate.split('/');
+                const currentDate = new Date();
+                const currentYear = currentDate.getFullYear() % 100; // Get last 2 digits
+                const currentMonth = currentDate.getMonth() + 1; // getMonth() returns 0-11
+
+                // Convert to numbers
+                const expMonth = parseInt(month);
+                const expYear = parseInt(year);
+
+                // Check if month is valid (1-12)
+                if (expMonth < 1 || expMonth > 12) {
+                    return false;
+                }
+
+                // Check if date is in the future
+                if (expYear < currentYear || (expYear === currentYear && expMonth < currentMonth)) {
+                    return false;
+                }
+
+                return true;
+            }
+
+            // Only allow numbers in CVV
+            const cvv = document.getElementById('cvv');
+            cvv.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/gi, '');
+            });
+
+            // Handle payment completion
+            document.querySelector('.complete-payment').addEventListener('click', async () => {
+                const token = localStorage.getItem('token');
+                
+                if (!token) {
+                    showToast('Please log in to complete your purchase', 'error');
+                    setTimeout(() => window.location.href = 'login.html', 1500);
+                    return;
+                }
+
+                if (!selectedPlan) {
+                    showToast('Please select a plan first', 'error');
+                    return;
+                }
+
+                const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
+                
+                if (!paymentMethod) {
+                    showToast('Please select a payment method', 'error');
+                    return;
+                }
+
+                // Validate credit card details if credit card is selected
+                if (paymentMethod === 'credit-card') {
+                    const cardNumber = document.getElementById('card-number').value.replace(/\s+/g, '');
+                    const expiryDate = document.getElementById('expiry-date').value;
+                    const cvv = document.getElementById('cvv').value;
+                    const cardName = document.getElementById('card-name').value;
+                    const cardType = document.getElementById('card-type').value;
+
+                    if (!cardType) {
+                        showToast('Please select a card type', 'error');
+                        return;
+                    }
+
+                    if (!cardNumber || !expiryDate || !cvv || !cardName) {
+                        showToast('Please fill in all card details', 'error');
+                        return;
+                    }
+
+                    if (cardNumber.length !== 16) {
+                        showToast('Please enter a valid 16-digit card number', 'error');
+                        return;
+                    }
+
+                    if (cvv.length !== 3) {
+                        showToast('Please enter a valid 3-digit CVV', 'error');
+                        return;
+                    }
+
+                    if (!isValidExpiryDate(expiryDate)) {
+                        showToast('Please enter a valid expiry date (MM/YY) that is not expired', 'error');
+                        return;
+                    }
+                } else if (paymentMethod === 'vodafone-cash') {
+                    const vodafoneNumber = document.getElementById('vodafone-number').value;
+                    if (!vodafoneNumber) {
+                        showToast('Please enter your Vodafone Cash number', 'error');
+                        return;
+                    }
+                }
+
+                // Show processing animation
+                document.querySelector('.payment-section').style.display = 'none';
+                document.querySelector('.processing-animation').style.display = 'block';
+
+                try {
+                    // Simulate API call delay
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+
+                    const paymentData = {
+                        plan: selectedPlan,
+                        paymentMethod: paymentMethod
+                    };
+
+                    if (paymentMethod === 'credit-card') {
+                        paymentData.cardDetails = {
+                            cardNumber: document.getElementById('card-number').value.replace(/\s+/g, ''),
+                            expiryDate: document.getElementById('expiry-date').value,
+                            cvv: document.getElementById('cvv').value,
+                            cardName: document.getElementById('card-name').value,
+                            cardType: document.getElementById('card-type').value
+                        };
+                    } else if (paymentMethod === 'vodafone-cash') {
+                        paymentData.vodafoneNumber = document.getElementById('vodafone-number').value;
+                    }
+
+                    const response = await fetch('http://localhost:5000/api/subscribe', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(paymentData)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        // Hide processing animation
+                        document.querySelector('.processing-animation').style.display = 'none';
+
+                        // Update transaction details
+                        document.getElementById('transaction-id').textContent = generateTransactionId();
+                        document.getElementById('transaction-plan').textContent = selectedPlan;
+                        document.getElementById('transaction-amount').textContent = 
+                            selectedPlan === 'Basic' ? 'EGP 349' : 'EGP 749';
+                        document.getElementById('transaction-method').textContent = 
+                            paymentMethod === 'credit-card' ? 'Credit Card' :
+                            paymentMethod === 'paypal' ? 'PayPal' : 'Vodafone Cash';
+                        document.getElementById('transaction-date').textContent = formatDate(new Date());
+
+                        // Show success message
+                        showToast('Payment completed successfully! Your subscription is now active.', 'success');
+
+                        // Show confirmation
+                        document.querySelector('.subscription-confirmation').style.display = 'block';
+                        document.querySelector('.subscription-confirmation').scrollIntoView({ behavior: 'smooth' });
+
+                        // Redirect to home page after 3 seconds
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 3000);
+                    } else {
+                        throw new Error(data.error || 'Payment failed');
+                    }
+                } catch (error) {
+                    // Hide processing animation
+                    document.querySelector('.processing-animation').style.display = 'none';
+                    // Show payment section again
+                    document.querySelector('.payment-section').style.display = 'block';
+                    showToast(error.message || 'Error processing payment. Please try again.', 'error');
+                }
+            });
+        });
+
+        // Add these functions to your existing JavaScript
+        function generateTransactionId() {
+            return 'TRX' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+    </script>
+    <!-- Authentication Scripts -->
+    
+    <script src="js/api.js"></script> 
+    <script src="js/auth.js"></script>
+    <script src="js/auth-init.js"></script>
+    
+
+    <script src="js/fixed_merged_main.js"></script>
+    
+    
+     
+</body>
+</html>

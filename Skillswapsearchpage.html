@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Swap Search</title>
+  <link rel="stylesheet" href="css/style22.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          Skill<span class="logo-accent">Bridge</span>
+        </a>
+      </div>
+      <div class="main-menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="#">Surfaces</a>
+            <div class="dropdown-content">
+              <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+              <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+              <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+            </div>
+          </li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="signup.html" class="btn" id="signup-btn"><i class="fas fa-user"></i> Sign Up</a></li>
+          <li><a href="login.html" class="btn" id="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+        </ul>
+      </div>
+      <button class="hamburger-button">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+      </button>
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <button type="button" class="close-sidebar">&times;</button>
+        </div>
+        <div class="sidebar-content">
+          <div class="menu-section">
+            <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+            <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+            <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+            <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+            <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+            <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+            <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+            <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+            <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+          </div>
+          <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+          <div class="menu-section support-section">
+            <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+            <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+            <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+            <a href="#" class="signout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="ss-skillswap-search-page">
+    <div class="ss-container">
+      <h1>Search for Your Required Skill</h1>
+      <div class="ss-search-section">
+        <div class="form-group">
+          <input type="text" id="skillSearch" placeholder="Search for a skill..." class="form-control">
+        </div>
+        <div class="ss-filters">
+          <select id="levelFilter" class="ss-filter-select">
+            <option value="">All Levels</option>
+            <option value="Expert">Expert</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Intermediate">Intermediate</option>
+          </select>
+          <button id="clearBtn" class="ss-clear-btn">
+            <i class="fas fa-times"></i> Clear
+          </button>
+        </div>
+        <div class="ss-skill-suggestions">
+          <div class="ss-skill-tag" onclick="searchSkill('Web Development')">
+            <i class="fas fa-code"></i> Web Development
+          </div>
+          <div class="ss-skill-tag" onclick="searchSkill('Data Science')">
+            <i class="fas fa-database"></i> Data Science
+          </div>
+          <div class="ss-skill-tag" onclick="searchSkill('Digital Marketing')">
+            <i class="fas fa-bullhorn"></i> Digital Marketing
+          </div>
+          <div class="ss-skill-tag" onclick="searchSkill('UI/UX Design')">
+            <i class="fas fa-paint-brush"></i> UI/UX Design
+          </div>
+          <div class="ss-skill-tag" onclick="searchSkill('Mobile Development')">
+            <i class="fas fa-mobile-alt"></i> Mobile Development
+          </div>
+        </div>
+      </div>
+      <div id="userResults" class="ss-user-results"></div>
+      <div id="loading" class="ss-loading">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </div>
+  </div>
+  <!-- Authentication Scripts -->
+  
+  <script src="js/login-guard.js"></script>
+  <script src="js/api.js"></script>
+
+    <script src="js/auth-init.js"></script>
+
+    <script src="js/fixed_merged_main.js"></script>
+  
+    
+   
+    <script src="js/auth.js"></script>
+    <script src="js/skillSwapManager.js"></script>
+    <script>
+      window.skillSwapManager = new SkillSwapManager();
+      window.skillSwapManager.loadUsers();
+    </script>
+</body>
+</html>

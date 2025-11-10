@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Details - SkillBridge</title>
+    <link rel="stylesheet" href="css/style22.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        
+        .tutorial-details-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .tutorial-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tutorial-image {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .tutorial-info {
+            flex: 1;
+        }
+
+        .tutorial-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .tutorial-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tutorial-description {
+            margin: 2rem 0;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .tutorial-sections {
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-content {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .instructor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .instructor-details {
+            flex: 1;
+        }
+
+        .instructor-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .instructor-bio {
+            color: #666;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+        .btn-secondary {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #1976D2;
+        }
+
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requirements-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .requirements-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+        }
+
+        /* Add these styles for the hamburger menu and sidebar */
+        .hamburger-button {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .hamburger-line {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background-color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .sidebar-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .sidebar-content {
+            padding: 1rem;
+        }
+
+        .menu-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-section a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .menu-section a:hover,
+        .menu-section a:focus {
+            background-color: #f5f5f5 !important;
+            color: #222 !important;
+        }
+
+        .menu-section a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-section-title {
+            padding: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 992px) {
+            .hamburger-button {
+                display: block;
+            }
+
+            .main-menu {
+                display: none;
+            }
+
+            .hamburger-button.active .hamburger-line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger-button.active .hamburger-line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger-button.active .hamburger-line:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    Skill<span class="logo-accent">Bridge</span>
+                </a>
+            </div>
+            <div class="main-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#">Surfaces</a>
+                        <div class="dropdown-content">
+                            <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+                            <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+                            <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                        </div>
+                    </li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="signup.html" class="btn"><i class="fas fa-user"></i> Sign Up</a></li>
+                    <li><a href="login.html" class="btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+                </ul>
+            </div>
+            <button class="hamburger-button">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </button>
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <button type="button" class="close-sidebar">&times;</button>
+                </div>
+                <div class="sidebar-content">
+                    <div class="menu-section">
+                        <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+                        <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+                        <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+                        <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+                        <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+                        <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                        <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+                        <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    </div>
+                    <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+                    <div class="menu-section support-section">
+                        <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+                        <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                        <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+                        <a href="#" class="signout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-details-container">
+        <div class="tutorial-header">
+            <img id="tutorialImage" src="" alt="Tutorial Cover" class="tutorial-image">
+            <div class="tutorial-info">
+                <h1 id="tutorialTitle" class="tutorial-title">Loading...</h1>
+                <div class="tutorial-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="tutorialDuration">Duration</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-signal"></i>
+                        <span id="tutorialLevel">Level</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span id="tutorialStudents">Students</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-star"></i>
+                        <span id="tutorialRating">Rating</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button id="startLearningBtn" class="btn btn-primary">
+                        <i class="fas fa-play"></i> Start Learning
+                    </button>
+                    <button id="enrollBtn" class="btn btn-secondary">
+                        <i class="fas fa-graduation-cap"></i> Enroll Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tutorial-description" id="tutorialDescription">
+            Loading description...
+        </div>
+
+        <div class="tutorial-sections">
+            <h2 class="section-title">What You'll Learn</h2>
+            <div class="section-content" id="learningObjectives">
+                Loading learning objectives...
+            </div>
+
+            <h2 class="section-title">Requirements</h2>
+            <div class="section-content">
+                <ul class="requirements-list" id="requirementsList">
+                    <li>Loading requirements...</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">About the Instructor</h2>
+            <div class="instructor-info">
+                <img id="instructorAvatar" src="" alt="Instructor" class="instructor-avatar">
+                <div class="instructor-details">
+                    <h3 id="instructorName" class="instructor-name">Loading...</h3>
+                    <p id="instructorBio" class="instructor-bio">Loading instructor bio...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="js/login-guard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Get tutorial ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const tutorialId = urlParams.get('id');
+
+            // Redirect if tutorialId is invalid (less than 11 or not a number)
+            if (!tutorialId || isNaN(Number(tutorialId)) || Number(tutorialId) < 11) {
+                alert('Invalid or non-existent tutorial. Redirecting to tutorials list.');
+                window.location.href = 'online-tutorial request.html';
+                return;
+            }
+
+            console.log('URL Parameters:', Object.fromEntries(urlParams.entries()));
+            console.log('Tutorial ID from URL:', tutorialId);
+
+            // Get auth token
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please log in to view tutorial details');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                // Fetch tutorial details
+                console.log('Fetching tutorial details for ID:', tutorialId);
+                const url = `http://localhost:5000/api/tutorials/${tutorialId}`;
+                console.log('Request URL:', url);
+                
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                console.log('Response status:', response.status);
+                const responseText = await response.text();
+                console.log('Raw response:', responseText);
+
+                if (!response.ok) {
+                    let errorData;
+                    try {
+                        errorData = JSON.parse(responseText);
+                    } catch (e) {
+                        errorData = { error: responseText };
+                    }
+                    console.error('Server response:', errorData);
+                    throw new Error(`Failed to fetch tutorial details: ${errorData.error || response.statusText}`);
+                }
+
+                const tutorial = JSON.parse(responseText);
+                console.log('Received tutorial data:', tutorial);
+                
+                // Update page content with tutorial details
+                document.getElementById('tutorialTitle').textContent = tutorial.title;
+                document.getElementById('tutorialImage').src = tutorial.image || 'Images/online tutorials/graphic.jpg';
+                document.getElementById('tutorialDuration').textContent = tutorial.duration || 'Not specified';
+                document.getElementById('tutorialLevel').textContent = tutorial.level || 'Not specified';
+                document.getElementById('tutorialStudents').textContent = `${tutorial.students || 0} students`;
+                document.getElementById('tutorialRating').textContent = `${tutorial.rating || 0} / 5`;
+                document.getElementById('tutorialDescription').textContent = tutorial.description || 'No description available';
+                
+                // Attempt to parse JSON strings if necessary
+                try {
+                    if (typeof tutorial.learning_objectives === 'string') {
+                        tutorial.learning_objectives = JSON.parse(tutorial.learning_objectives);
+                    }
+                    if (typeof tutorial.requirements === 'string') {
+                        tutorial.requirements = JSON.parse(tutorial.requirements);
+                    }
+                } catch (e) {
+                    console.error('Error parsing JSON data from API:', e);
+                    // Keep the original value or set to empty array to avoid further errors
+                    if (!Array.isArray(tutorial.learning_objectives)) tutorial.learning_objectives = [];
+                    if (!Array.isArray(tutorial.requirements)) tutorial.requirements = [];
+                }
+
+                // Update learning objectives
+                const learningObjectivesElement = document.getElementById('learningObjectives');
+                if (Array.isArray(tutorial.learning_objectives) && tutorial.learning_objectives.length > 0) {
+                    const objectivesList = document.createElement('ul');
+                    objectivesList.className = 'requirements-list';
+                    tutorial.learning_objectives.forEach(objective => {
+                        const li = document.createElement('li');
+                        li.textContent = objective;
+                        objectivesList.appendChild(li);
+                    });
+                    learningObjectivesElement.innerHTML = '';
+                    learningObjectivesElement.appendChild(objectivesList);
+                } else {
+                    learningObjectivesElement.textContent = 'No learning objectives specified';
+                }
+
+                // Update requirements
+                const requirementsList = document.getElementById('requirementsList');
+                if (Array.isArray(tutorial.requirements) && tutorial.requirements.length > 0) {
+                    requirementsList.innerHTML = '';
+                    tutorial.requirements.forEach(requirement => {
+                        const li = document.createElement('li');
+                        li.textContent = requirement;
+                        requirementsList.appendChild(li);
+                    });
+                } else {
+                    requirementsList.innerHTML = '<li>No specific requirements</li>';
+                }
+                
+                // Update instructor information
+                document.getElementById('instructorName').textContent = tutorial.instructor_name || 'Unknown Instructor';
+                document.getElementById('instructorAvatar').src = tutorial.instructor_avatar || 'path/to/default-avatar.jpg';
+                document.getElementById('instructorBio').textContent = tutorial.instructor_bio || 'No bio available';
+
+                // Handle enrollment status
+                const enrollBtn = document.getElementById('enrollBtn');
+                const startLearningBtn = document.getElementById('startLearningBtn');
+                
+                if (tutorial.is_enrolled) {
+                    enrollBtn.textContent = 'Already Enrolled';
+                    enrollBtn.disabled = true;
+                    startLearningBtn.addEventListener('click', function() {
+                        window.location.href = `tutorial-content.html?id=${tutorialId}`;
+                    });
+                } else {
+                    startLearningBtn.addEventListener('click', function() {
+                        alert('Please enroll in the tutorial first');
+                    });
+
+                    enrollBtn.addEventListener('click', async function() {
+                        try {
+                            console.log('Enrolling in tutorial:', tutorialId);
+                            const enrollResponse = await fetch(`http://localhost:5000/api/tutorials/${tutorialId}/enroll`, {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `Bearer ${token}`,
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+
+                            if (!enrollResponse.ok) {
+                                const errorData = await enrollResponse.json();
+                                console.error('Enrollment error:', errorData);
+                                throw new Error(errorData.error || 'Failed to enroll');
+                            }
+
+                            const result = await enrollResponse.json();
+                            console.log('Enrollment successful:', result);
+
+                            alert('Successfully enrolled in the tutorial!');
+                            enrollBtn.textContent = 'Already Enrolled';
+                            enrollBtn.disabled = true;
+                            
+                            // Update start learning button behavior
+                            startLearningBtn.removeEventListener('click', arguments.callee);
+                            startLearningBtn.addEventListener('click', function() {
+                                window.location.href = `tutorial-content.html?id=${tutorialId}`;
+                            });
+                        } catch (error) {
+                            console.error('Error:', error);
+                            alert(error.message || 'Failed to enroll in the tutorial');
+                        }
+                    });
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert(error.message || 'Error loading tutorial details');
+            }
+
+            // Initialize sidebar functionality
+            const hamburgerBtn = document.querySelector('.hamburger-button');
+            const sidebar = document.querySelector('.sidebar');
+            const closeSidebarBtn = document.querySelector('.close-sidebar');
+            let sidebarOverlay = document.querySelector('.sidebar-overlay');
+
+            function openSidebar() {
+                sidebar.classList.add('active');
+                hamburgerBtn.classList.add('active');
+                if (!sidebarOverlay) {
+                    sidebarOverlay = document.createElement('div');
+                    sidebarOverlay.className = 'sidebar-overlay';
+                    document.body.appendChild(sidebarOverlay);
+                }
+                sidebarOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                hamburgerBtn.classList.remove('active');
+                if (sidebarOverlay) {
+                    sidebarOverlay.style.display = 'none';
+                }
+                document.body.style.overflow = '';
+            }
+
+            if (hamburgerBtn) {
+                hamburgerBtn.addEventListener('click', openSidebar);
+            }
+
+            if (closeSidebarBtn) {
+                closeSidebarBtn.addEventListener('click', closeSidebar);
+            }
+
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar on window resize if desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992 && sidebar.classList.contains('active')) {
+                    closeSidebar();
+                }
+            });
+
+            // Initialize dropdown menus
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                const content = dropdown.querySelector('.dropdown-content');
+                
+                if (window.innerWidth > 992) {
+                    dropdown.addEventListener('mouseenter', () => {
+                        content.style.display = 'block';
+                        setTimeout(() => {
+                            content.style.opacity = '1';
+                            content.style.visibility = 'visible';
+                        }, 10);
+                    });
+
+                    dropdown.addEventListener('mouseleave', () => {
+                        content.style.opacity = '0';
+                        content.style.visibility = 'hidden';
+                        setTimeout(() => {
+                            content.style.display = 'none';
+                        }, 300);
+                    });
+                }
+            });
+        });
+
+        async function handleEnrollNow() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    alert('Please log in to enroll in this tutorial');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const tutorialId = new URLSearchParams(window.location.search).get('id');
+                if (!tutorialId) {
+                    alert('Tutorial ID not found');
+                    return;
+                }
+
+                const response = await fetch(`http://localhost:5000/api/tutorials/${tutorialId}/enroll`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Failed to enroll in tutorial');
+                }
+
+                alert('Successfully enrolled in the tutorial!');
+                window.location.href = 'my-tutorials.html';
+            } catch (error) {
+                console.error('Error:', error);
+                alert(error.message || 'Error enrolling in tutorial. Please try again later.');
+            }
+        }
+    </script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/auth-init.js"></script>
+
+    <script src="js/fixed_merged_main.js"></script>
+   
+</body>
+</html>

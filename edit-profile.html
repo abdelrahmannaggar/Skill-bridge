@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - SkillBridge</title>
+    <link rel="stylesheet" href="css/style22.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .edit-profile-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .edit-profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .edit-profile-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+        .save-btn, .cancel-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .save-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .save-btn:hover {
+            background-color: #45a049;
+        }
+        .cancel-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .cancel-btn:hover {
+            background-color: #da190b;
+        }
+        .avatar-upload {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .avatar-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 1rem auto;
+            object-fit: cover;
+        }
+        .upload-btn {
+            background-color: #2196F3;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .upload-btn:hover {
+            background-color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    Skill<span class="logo-accent">Bridge</span>
+                </a>
+            </div>
+            <div class="main-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#">Surfaces</a>
+                        <div class="dropdown-content">
+                            <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+                            <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+                            <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                        </div>
+                    </li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="signup.html" class="btn"><i class="fas fa-user"></i> Sign Up</a></li>
+                    <li><a href="login.html" class="btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+                </ul>
+            </div>
+            <button class="hamburger-button">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </button>
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <button type="button" class="close-sidebar">&times;</button>
+                </div>
+                <div class="sidebar-content">
+                    <div class="menu-section">
+                        <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+                        <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+                        <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+                        <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+                        <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+                        <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                        <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+                        <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    </div>
+                    <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+                    <div class="menu-section support-section">
+                        <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+                        <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                        <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+                        <a href="#" class="signout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="edit-profile-container">
+        <div class="edit-profile-header">
+            <h1><i class="fas fa-user-edit"></i> Edit Profile</h1>
+        </div>
+
+        <form id="editProfileForm" class="edit-profile-form">
+            <div class="avatar-upload">
+                <img id="avatarPreview" src="https://ui-avatars.com/api/?name=User" alt="Profile Avatar" class="avatar-preview">
+                <div>
+                    <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                    <button type="button" class="upload-btn" onclick="document.getElementById('avatarInput').click()">
+                        <i class="fas fa-camera"></i> Change Profile Picture
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location">
+            </div>
+
+            <div class="form-group">
+                <label for="occupation">Occupation</label>
+                <input type="text" id="occupation" name="occupation">
+            </div>
+
+            <div class="form-group">
+                <label for="bio">About Me</label>
+                <textarea id="bio" name="bio" rows="4"></textarea>
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" class="cancel-btn" onclick="window.location.href='profilepage.html'">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button type="submit" class="save-btn">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check if user is logged in
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            let currentAvatarUrl = null;
+
+            // Fetch current user data
+            try {
+                const response = await fetch('http://localhost:5000/api/users/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) throw new Error('Failed to fetch profile');
+                const user = await response.json();
+
+                // Fill form with current data
+                document.getElementById('fullName').value = user.full_name || '';
+                document.getElementById('email').value = user.email || '';
+                document.getElementById('location').value = user.location || '';
+                document.getElementById('occupation').value = user.occupation || '';
+                document.getElementById('bio').value = user.bio || '';
+                
+                // Update avatar preview
+                const avatarPreview = document.getElementById('avatarPreview');
+                if (user.avatar && user.avatar !== '') {
+                    avatarPreview.src = user.avatar;
+                    currentAvatarUrl = user.avatar;
+                } else {
+                    // Use consistent avatar based on user ID or name
+                    const seed = user.id ? user.id : (user.username ? user.username.charCodeAt(0) : 1);
+                    const avatarNumber = ((seed % 26) + 26) % 26 + 1;
+                    currentAvatarUrl = `./Images/avatars/avatar${avatarNumber}.jpg`;
+                    avatarPreview.src = currentAvatarUrl;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error loading profile data');
+            }
+
+            // Handle avatar upload
+            document.getElementById('avatarInput').addEventListener('change', async function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Show loading state
+                    const avatarPreview = document.getElementById('avatarPreview');
+                    const originalSrc = avatarPreview.src;
+                    avatarPreview.style.opacity = '0.5';
+
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    try {
+                        const response = await fetch('http://localhost:5000/api/upload', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: formData
+                        });
+
+                        if (!response.ok) throw new Error('Upload failed');
+                        const data = await response.json();
+                        
+                        // Update avatar preview with new image
+                        currentAvatarUrl = data.fileUrl;
+                        avatarPreview.src = currentAvatarUrl;
+                        avatarPreview.style.opacity = '1';
+
+                        // Store the avatar URL in localStorage for immediate access
+                        localStorage.setItem('userAvatar', currentAvatarUrl);
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error uploading avatar');
+                        // Restore original avatar on error
+                        avatarPreview.src = originalSrc;
+                        avatarPreview.style.opacity = '1';
+                    }
+                }
+            });
+
+            // Handle form submission
+            document.getElementById('editProfileForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const userData = {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    location: document.getElementById('location').value,
+                    occupation: document.getElementById('occupation').value,
+                    bio: document.getElementById('bio').value,
+                    avatar: currentAvatarUrl // Use the current avatar URL
+                };
+
+                console.log('Form values before submission:', {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    location: document.getElementById('location').value,
+                    occupation: document.getElementById('occupation').value,
+                    bio: document.getElementById('bio').value,
+                    avatar: currentAvatarUrl
+                }); // Debug log
+
+                console.log('Submitting user data:', userData); // Debug log
+
+                try {
+                    const response = await fetch('http://localhost:5000/api/users/profile', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(userData)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('Server error:', errorData); // Debug log
+                        throw new Error('Failed to update profile');
+                    }
+                    
+                    const updatedUser = await response.json();
+                    console.log('Server response:', updatedUser); // Debug log
+                    
+                    // Store the updated avatar URL in localStorage
+                    localStorage.setItem('userAvatar', currentAvatarUrl);
+                    
+                    // Show success message
+                    alert('Profile updated successfully!');
+                    
+                    // Redirect to profile page
+                    window.location.href = 'profilepage.html';
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error updating profile');
+                }
+            });
+        });
+    </script>
+
+    <!-- Authentication Scripts -->
+    
+    
+    
+
+    <script src="js/api.js"></script> 
+    <script src="js/auth.js"></script>
+    <script src="js/auth-init.js"></script>
+
+    <script src="js/fixed_merged_main.js"></script>
+      <script src="js/profile.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/login-guard.js"></script>
+</body>
+</html> 

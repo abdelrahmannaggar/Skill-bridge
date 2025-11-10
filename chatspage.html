@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat - SkillBridge</title>
+  <link rel="stylesheet" href="css/style22.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+</head>
+<body>
+  <!-- Header/Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          Skill<span class="logo-accent">Bridge</span>
+        </a>
+      </div>
+      <div class="main-menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="#">Surfaces</a>
+            <div class="dropdown-content">
+              <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+              <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+              <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+            </div>
+          </li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="signup.html" class="btn" id="signup-btn"><i class="fas fa-user"></i> Sign Up</a></li>
+          <li><a href="login.html" class="btn" id="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+        </ul>
+      </div>
+      <button class="hamburger-button">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+      </button>
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <button type="button" class="close-sidebar">&times;</button>
+        </div>
+        <div class="sidebar-content">
+          <div class="menu-section">
+            <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+            <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+            <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+            <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+            <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+            <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+            <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+            <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+            <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+          </div>
+          <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+          <div class="menu-section support-section">
+            <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+            <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+            <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="chat-main-layout">
+    <!-- Left Sidebar with Recent Chats -->
+    <aside class="recent-chats-sidebar">
+      <div class="sidebar-header">
+        <div class="header-content">
+          <h2>Messages</h2>
+          <button class="new-chat-btn" title="Start New Chat">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search conversations...">
+        </div>
+      </div>
+      <div class="recent-chats-list">
+        <div class="recent-chat active" data-username="John Doe">
+          <div class="avatar status-dot online">JD</div>
+          <span class="unread-badge" style="display:none;">2</span>
+          <button class="chat-options-btn" title="Chat Options"><i class="fas fa-ellipsis-v"></i></button>
+          <div class="chat-info">
+            <div class="chat-header">
+              <h4>John Doe</h4>
+              <span class="time">2:30 PM</span>
+            </div>
+            <p class="last-message">Hey, how's it going?</p>
+            <span class="user-status-text">Online</span>
+          </div>
+        </div>
+        <div class="recent-chat" data-username="Alice Smith">
+          <div class="avatar status-dot offline">AS</div>
+          <span class="unread-badge" style="display:none;">5</span>
+          <button class="chat-options-btn" title="Chat Options"><i class="fas fa-ellipsis-v"></i></button>
+          <div class="chat-info">
+            <div class="chat-header">
+              <h4>Alice Smith</h4>
+              <span class="time">1:45 PM</span>
+            </div>
+            <p class="last-message">Can we schedule a meeting?</p>
+            <span class="user-status-text">Offline</span>
+          </div>
+        </div>
+        <div class="recent-chat" data-username="Robert Johnson">
+          <div class="avatar status-dot online">RJ</div>
+          <span class="unread-badge" style="display:none;">1</span>
+          <button class="chat-options-btn" title="Chat Options"><i class="fas fa-ellipsis-v"></i></button>
+          <div class="chat-info">
+            <div class="chat-header">
+              <h4>Robert Johnson</h4>
+              <span class="time">11:20 AM</span>
+            </div>
+            <p class="last-message">Thanks for your help!</p>
+            <span class="user-status-text">Online</span>
+          </div>
+        </div>
+        <div class="recent-chat" data-username="Maria Lee">
+          <div class="avatar status-dot offline">ML</div>
+          <span class="unread-badge" style="display:none;">0</span>
+          <button class="chat-options-btn" title="Chat Options"><i class="fas fa-ellipsis-v"></i></button>
+          <div class="chat-info">
+            <div class="chat-header">
+              <h4>Maria Lee</h4>
+              <span class="time">Yesterday</span>
+            </div>
+            <p class="last-message">The project looks great!</p>
+            <span class="user-status-text">Offline</span>
+          </div>
+        </div>
+        <div class="recent-chat" data-username="Project Team" data-group="true">
+          <div class="avatar group-avatar"><i class="fas fa-users"></i></div>
+          <span class="unread-badge" style="display:none;">3</span>
+          <button class="chat-options-btn" title="Chat Options"><i class="fas fa-ellipsis-v"></i></button>
+          <div class="chat-info">
+            <div class="chat-header">
+              <h4>Project Team</h4>
+              <span class="time">10:00 AM</span>
+            </div>
+            <p class="last-message">Let's meet at 2 PM today.</p>
+            <span class="user-status-text">Group</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Chat Area -->
+    <div class="chat">
+      <div class="chat-header">
+        <div class="chat-header-user">
+          <div class="avatar status-dot online">JD</div>
+          <div>
+            <h3>John Doe</h3>
+            <span class="status online">Online</span>
+            <span class="typing-indicator-header" style="display:none; color:#4a90e2; font-size:0.95em; margin-left:8px;">typing...</span>
+            <div class="group-members" style="display:none;"></div>
+          </div>
+        </div>
+        <div class="chat-actions">
+          <button class="action-btn" title="Start Video Call">
+            <i class="fas fa-video"></i>
+          </button>
+          <button class="action-btn" title="Start Google Meet">
+            <i class="fab fa-google"></i>
+          </button>
+          <button class="action-btn" title="More Options">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+        </div>
+      </div>
+      <div class="chat-messages">
+        <div class="message-group received">
+          <div class="avatar status-dot online">JD</div>
+          <div class="bubble">
+            Hey, how's it going?
+            <span class="timestamp">2:30 PM</span>
+            <button class="reaction-btn" title="React">😊</button>
+            <div class="reactions-bar"></div>
+          </div>
+        </div>
+        <div class="message-group sent">
+          <div class="bubble">
+            I'm doing great! How about you?
+            <span class="timestamp" title="2024-05-14 14:31:00">2:31 PM</span>
+            <span class="read-receipt" title="Delivered">✓</span>
+            <button class="reaction-btn" title="React">😊</button>
+            <button class="pin-btn" title="Pin Message"><i class="fas fa-thumbtack"></i></button>
+            <div class="reactions-bar"></div>
+          </div>
+        </div>
+        <div class="message-group received">
+          <div class="avatar status-dot online">JD</div>
+          <div class="bubble">
+            Pretty good! Just working on some new projects.
+            <span class="timestamp">2:32 PM</span>
+            <button class="reaction-btn" title="React">😊</button>
+            <div class="reactions-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <div class="chat-tools">
+          <button class="tool-btn" title="Add Emoji" onclick="showEmojiPicker()">
+            <i class="far fa-smile"></i>
+          </button>
+          <button class="tool-btn" title="Attach File" onclick="showFileUpload()">
+            <i class="fas fa-paperclip"></i>
+          </button>
+          <button class="tool-btn" title="Add Link" onclick="showLinkInput()">
+            <i class="fas fa-link"></i>
+          </button>
+          <button class="tool-btn" title="Record Voice" id="voice-record-btn">
+            <i class="fas fa-microphone"></i>
+          </button>
+        </div>
+        <input type="text" id="message-input" placeholder="Type a message..." onkeypress="handleMessageInput(event)">
+        <button class="send-btn" title="Send Message" onclick="handleSendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="file-preview-container"></div>
+  <!-- Image Preview Modal -->
+  <div id="image-preview-modal" class="modal" style="display:none;align-items:center;justify-content:center;">
+    <span class="close" id="close-image-preview-modal" style="position:absolute;top:24px;right:36px;font-size:2.2em;cursor:pointer;color:#fff;z-index:2;">&times;</span>
+    <img id="image-preview-modal-img" src="" alt="Preview" style="max-width:90vw;max-height:80vh;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.25);background:#fff;z-index:1;">
+  </div>
+  <!-- New Chat Modal -->
+  <div id="new-chat-modal" class="modal" style="display:none;">
+    <div class="modal-content" style="max-width:400px;">
+      <span class="close" id="close-new-chat-modal">&times;</span>
+      <h2>Start New Chat</h2>
+      <input type="text" id="new-chat-search" placeholder="Search users..." style="width:100%;margin:16px 0;padding:10px 12px;border-radius:8px;border:1px solid #e0e0e0;">
+      <ul id="new-chat-user-list" style="list-style:none;padding:0;margin:0;max-height:200px;overflow-y:auto;">
+        <li class="new-chat-user-item" style="padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;">John Doe</li>
+        <li class="new-chat-user-item" style="padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;">Alice Smith</li>
+        <li class="new-chat-user-item" style="padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;">Robert Johnson</li>
+        <li class="new-chat-user-item" style="padding:10px 0;cursor:pointer;">Maria Lee</li>
+      </ul>
+    </div>
+  </div>
+  <!-- User Profile Modal -->
+  <div id="user-profile-modal" class="modal" style="display:none;align-items:center;justify-content:center;">
+    <div class="modal-content" style="max-width:350px;position:relative;">
+      <span class="close" id="close-user-profile-modal" style="position:absolute;top:18px;right:24px;font-size:2em;cursor:pointer;color:#888;">&times;</span>
+      <div id="user-profile-avatar" class="avatar" style="width:70px;height:70px;font-size:2.2em;margin:0 auto 12px auto;"></div>
+      <h2 id="user-profile-name" style="text-align:center;margin-bottom:6px;"></h2>
+      <div id="user-profile-status" style="text-align:center;font-size:0.98em;color:#4a90e2;margin-bottom:10px;"></div>
+      <div id="user-profile-bio" style="text-align:center;font-size:0.97em;color:#666;"></div>
+    </div>
+  </div>
+  <!-- In-App Toast Notification -->
+  <div id="toast-container" style="position:fixed;bottom:32px;right:32px;z-index:3000;"></div>
+  
+  <script src="js/login-guard.js"></script>
+  <script>
+    // Fetch users from the backend
+    async function fetchUsers() {
+      try {
+        const response = await fetch('http://localhost:5000/api/users');
+        return await response.json();
+      } catch (error) {
+        console.error('Failed to fetch users:', error);
+        return [];
+      }
+    }
+    // Fetch messages for a specific user (conversation)
+    async function fetchMessages(userId) {
+      try {
+        const response = await fetch(`http://localhost:5000/api/messages?user=${userId}`);
+        return await response.json();
+      } catch (error) {
+        console.error('Failed to fetch messages:', error);
+        return [];
+      }
+    }
+    // Render user list in the sidebar
+    async function renderUserList() {
+      const users = await fetchUsers();
+      const sidebar = document.querySelector('.recent-chats-list');
+      sidebar.innerHTML = '';
+      users.forEach(user => {
+        const initials = (user.full_name || user.username || '?').split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
+        const userDiv = document.createElement('div');
+        userDiv.className = 'recent-chat';
+        userDiv.dataset.userid = user.id;
+        userDiv.innerHTML = `
+          <div class="avatar status-dot online">${initials}</div>
+          <div class="chat-info">
+            <div class="chat-header">
+              <h4>${user.full_name || user.username}</h4>
+              <span class="time"></span>
+            </div>
+            <p class="last-message"></p>
+            <span class="user-status-text">Online</span>
+          </div>
+        `;
+        userDiv.addEventListener('click', () => renderMessages(user.id, user.full_name || user.username, initials));
+        sidebar.appendChild(userDiv);
+      });
+    }
+    // Render messages for a selected user
+    async function renderMessages(userId, userName, initials) {
+      const messages = await fetchMessages(userId);
+      const chatHeader = document.querySelector('.chat-header-user h3');
+      const chatAvatar = document.querySelector('.chat-header-user .avatar');
+      chatHeader.textContent = userName;
+      chatAvatar.textContent = initials;
+      const chatMessages = document.querySelector('.chat-messages');
+      chatMessages.innerHTML = '';
+      messages.forEach(msg => {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'message-group ' + (msg.sent_by_me ? 'sent' : 'received');
+        groupDiv.innerHTML = `
+          <div class="avatar status-dot online">${initials}</div>
+          <div class="bubble">
+            ${msg.content}
+            <span class="timestamp">${msg.time || ''}</span>
+          </div>
+        `;
+        chatMessages.appendChild(groupDiv);
+      });
+    }
+    // Initial render
+    renderUserList();
+    // Handle message input
+    function handleMessageInput(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        handleSendMessage();
+      }
+    }
+    // Handle send message
+    function handleSendMessage() {
+      const input = document.getElementById('message-input');
+      const message = input.value.trim();
+      
+      if (message) {
+        sendMessage(message);
+        input.value = '';
+      }
+    }
+    // Initialize emoji picker
+    function showEmojiPicker() {
+      const picker = createEmojiPicker((emoji) => {
+        const input = document.getElementById('message-input');
+        input.value += emoji;
+        input.focus();
+      });
+      
+      const button = document.querySelector('.tool-btn[title="Add Emoji"]');
+      const rect = button.getBoundingClientRect();
+      
+      picker.style.position = 'absolute';
+      picker.style.top = `${rect.bottom + 5}px`;
+      picker.style.left = `${rect.left}px`;
+      
+      document.body.appendChild(picker);
+      
+      // Close picker when clicking outside
+      document.addEventListener('click', function closePicker(e) {
+        if (!picker.contains(e.target) && e.target !== button) {
+          picker.remove();
+          document.removeEventListener('click', closePicker);
+        }
+      });
+    }
+    // Handle file upload
+    function showFileUpload() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*,video/*,audio/*,.pdf,.doc,.docx,.txt';
+      
+      input.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        try {
+          const formData = new FormData();
+          formData.append('file', file);
+          
+          const response = await fetch('http://localhost:5000/api/upload', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: formData
+          });
+          
+          if (!response.ok) throw new Error('Upload failed');
+          
+          const { url } = await response.json();
+          sendMessage(url, file.type.startsWith('image/') ? 'image' : 'file');
+        } catch (error) {
+          console.error('Upload error:', error);
+          showToast('Failed to upload file', 'error');
+        }
+      };
+      
+      input.click();
+    }
+    // Handle link input
+    function showLinkInput() {
+      const url = prompt('Enter URL:');
+      if (url) {
+        sendMessage(url, 'link');
+      }
+    }
+    // Handle voice recording
+    let mediaRecorder = null;
+    let audioChunks = [];
+    document.getElementById('voice-record-btn').addEventListener('click', async function() {
+      if (!mediaRecorder) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          
+          mediaRecorder.ondataavailable = (e) => {
+            audioChunks.push(e.data);
+          };
+          
+          mediaRecorder.onstop = async () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            const formData = new FormData();
+            formData.append('file', audioBlob, 'recording.webm');
+            
+            try {
+              const response = await fetch('http://localhost:5000/api/upload', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: formData
+              });
+              
+              if (!response.ok) throw new Error('Upload failed');
+              
+              const { url } = await response.json();
+              sendMessage(url, 'audio');
+            } catch (error) {
+              console.error('Upload error:', error);
+              showToast('Failed to upload audio', 'error');
+            }
+            
+            audioChunks = [];
+            mediaRecorder = null;
+          };
+          
+          mediaRecorder.start();
+          this.classList.add('recording');
+        } catch (error) {
+          console.error('Recording error:', error);
+          showToast('Failed to start recording', 'error');
+        }
+      } else {
+        mediaRecorder.stop();
+        this.classList.remove('recording');
+      }
+    });
+  </script>
+    <!-- Authentication Scripts -->
+    
+    
+    
+    <script src="js/api.js"></script> 
+    <script src="js/auth.js"></script>
+    <script src="js/auth-init.js"></script>
+
+    <script src="js/fixed_merged_main.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>
+    

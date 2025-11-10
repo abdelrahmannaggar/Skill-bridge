@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - SkillBridge</title>
+    <link rel="stylesheet" href="css/style22.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .profile-picture-upload {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+        .change-pic-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .change-pic-btn:hover {
+            background: #45a049;
+        }
+        .file-upload-input {
+            display: none;
+        }
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .achievement-badge {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .achievement-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .achievement-badge i {
+            color: #4CAF50;
+            font-size: 1.2rem;
+        }
+        .skill-level {
+            margin-left: auto;
+            background: #e9ecef;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+        .verified-icon {
+            color: #28a745;
+            margin-left: 0.5rem;
+        }
+        .no-skills {
+            text-align: center;
+            color: #6c757d;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            font-style: italic;
+            grid-column: 1 / -1;
+        }
+        .reviews-container {
+            margin-top: 2rem;
+        }
+        .review {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .review:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .review-info h3 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        .stars {
+            color: #ffc107;
+            margin-top: 0.3rem;
+        }
+        .review-date {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.3rem;
+        }
+        .review-text {
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .no-reviews {
+            text-align: center;
+            color: #6c757d;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+          <div class="logo">
+            <a href="index.html">
+              Skill<span class="logo-accent">Bridge</span>
+            </a>
+          </div>
+          <div class="main-menu">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="#">Surfaces</a>
+                <div class="dropdown-content">
+                  <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+                  <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+                  <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                </div>
+              </li>
+              <li><a href="aboutus.html">About Us</a></li>
+              <li><a href="contactus.html">Contact Us</a></li>
+              <li><a href="signup.html" class="btn" id="signup-btn"><i class="fas fa-user"></i> Sign Up</a></li>
+              <li><a href="login.html" class="btn" id="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+            </ul>
+          </div>
+          <button class="hamburger-button">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </button>
+          <div class="sidebar">
+            <div class="sidebar-header">
+              <button type="button" class="close-sidebar">&times;</button>
+            </div>
+            <div class="sidebar-content">
+              <div class="menu-section">
+                <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+                <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+                <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+                <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+                <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+                <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+                <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+                <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+              </div>
+              <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+              <div class="menu-section support-section">
+                <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+                <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+                <a href="#" class="signout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div class="profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-picture-upload">
+                <img src="./Images/avatars/avatar1.jpg" alt="Profile Avatar" class="profile-avatar" id="profile-avatar">
+                <button type="button" class="change-pic-btn" id="change-pic-btn" aria-label="Change Photo">
+                    <i class="fas fa-camera"></i>
+                </button>
+                <label for="avatar-upload" class="visually-hidden">Upload Profile Photo</label>
+                <input type="file" id="avatar-upload" accept="image/*" class="file-upload-input">
+            </div>
+            <h1 class="profile-name" id="profile-name">Loading...</h1>
+            <p class="profile-username" id="profile-username">@username</p>
+            <div class="profile-summary">
+                <span class="profile-badge"><i class="fas fa-star"></i> <span id="profile-rating">4.8</span> Rating</span>
+                <span class="profile-badge"><i class="fas fa-users"></i> <span id="profile-connections">0</span> Connections</span>
+                <span class="profile-badge"><i class="fas fa-clock"></i> Member since <span id="profile-member-since">2023</span></span>
+            </div>
+        </div>
+
+        <!-- Profile Tabs -->
+        <div class="profile-tabs">
+            <button class="profile-tab active" data-tab="about"><i class="fas fa-user"></i> About</button>
+            <button class="profile-tab" data-tab="skills"><i class="fas fa-code"></i> Skills</button>
+            <button class="profile-tab" data-tab="reviews"><i class="fas fa-star"></i> Reviews</button>
+            
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="about-tab" class="profile-tab-content">
+            <h2><i class="fas fa-user-circle"></i> About Me</h2>
+            <p id="profile-bio">Loading bio...</p>
+            <div class="profile-details">
+                <div class="detail-item">
+                    <i class="fas fa-envelope"></i>
+                    <span id="profile-email">Loading email...</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="profile-location">Loading location...</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span id="profile-occupation">Loading occupation...</span>
+                </div>
+            </div>
+            <div class="profile-buttons">
+                <a href="edit-profile.html" class="profile-edit-btn"><i class="fas fa-edit"></i> Edit Profile</a>
+                <button class="profile-logout-btn" onclick="logout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+
+        <div id="skills-tab" class="profile-tab-content" style="display: none;">
+            <h2><i class="fas fa-code"></i> Skills & Expertise</h2>
+            <div class="skills-container">
+                <!-- Skills will be dynamically populated here -->
+            </div>
+        </div>
+
+        <div id="reviews-tab" class="profile-tab-content" style="display: none;">
+            <h2><i class="fas fa-star"></i> Client Reviews</h2>
+            <div class="reviews-container">
+                <!-- Reviews will be dynamically populated here -->
+            </div>
+        </div>
+
+        <div id="activity-tab" class="profile-tab-content" style="display: none;">
+            <h2><i class="fas fa-chart-line"></i> Recent Activity</h2>
+            <div class="activity-timeline">
+                <div class="activity-item">
+                    <i class="fas fa-code-branch"></i>
+                    <div class="activity-content">
+                        <h3>Completed JavaScript Course</h3>
+                        <p>Advanced JavaScript Concepts</p>
+                        <span class="activity-date">2 days ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-trophy"></i>
+                    <div class="activity-content">
+                        <h3>Earned React Expert Badge</h3>
+                        <p>Completed all React challenges</p>
+                        <span class="activity-date">1 week ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-users"></i>
+                    <div class="activity-content">
+                        <h3>Joined Python Community</h3>
+                        <p>Started contributing to open source</p>
+                        <span class="activity-date">2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="profile-modal" style="display:none;">
+      <div class="profile-modal-content">
+        <div class="modal-header">
+          <h2><i class="fas fa-user-edit"></i> Edit Profile</h2>
+          <button type="button" class="close-btn" id="closeEditModal">&times;</button>
+        </div>
+        <form id="editProfileForm">
+          <div class="profile-input-group">
+            <i class="fas fa-user profile-input-icon"></i>
+            <input type="text" name="fullName" placeholder="Full Name" required>
+          </div>
+          <div class="profile-input-group">
+            <i class="fas fa-envelope profile-input-icon"></i>
+            <input type="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="profile-input-group">
+            <i class="fas fa-map-marker-alt profile-input-icon"></i>
+            <input type="text" name="location" placeholder="Location">
+          </div>
+          <div class="profile-input-group">
+            <i class="fas fa-briefcase profile-input-icon"></i>
+            <input type="text" name="occupation" placeholder="Occupation">
+          </div>
+          <div class="profile-input-group">
+            <i class="fas fa-align-left profile-input-icon"></i>
+            <textarea name="bio" placeholder="About Me" rows="4"></textarea>
+          </div>
+          <div class="resume-upload">
+            <label class="resume-upload-label">Resume</label>
+            <div class="file-upload-container">
+              <div class="file-upload-content">
+                <i class="fas fa-file-upload file-upload-icon"></i>
+                <div class="file-upload-text">Drag & drop your resume here</div>
+                <div class="file-upload-hint">or click to browse (PDF, DOC, DOCX)</div>
+                <input type="file" name="resume" accept=".pdf,.doc,.docx" class="file-upload-input">
+              </div>
+              <div class="upload-progress">
+                <div class="upload-progress-bar"></div>
+              </div>
+              <div class="upload-error"></div>
+            </div>
+            <div class="file-preview" style="display: none;">
+              <i class="fas fa-file-alt"></i>
+              <div class="file-preview-info">
+                <div class="file-preview-name"></div>
+                <div class="file-preview-size"></div>
+              </div>
+              <button type="button" class="file-preview-remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="profile-buttons">
+            <button type="submit" class="profile-edit-btn"><i class="fas fa-save"></i> Save Changes</button>
+            <button type="button" class="profile-logout-btn" id="cancelEditModal"><i class="fas fa-times"></i> Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+        // Ensure logout function is available globally
+        window.logout = function() {
+            try {
+                // Clear any stored tokens or user data
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                
+                // Show success message
+                if (typeof showToast === 'function') {
+                    showToast('Logged out successfully', 'success');
+                }
+                
+                // Redirect to login page
+                window.location.href = 'login.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                if (typeof showToast === 'function') {
+                    showToast('Error during logout', 'error');
+                }
+            }
+        };
+    </script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check if user is logged in
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Function to handle image loading errors
+            function handleImageError(img) {
+                console.log('Image failed to load:', img.src);
+                img.src = './Images/avatars/avatar1.jpg';
+            }
+
+            // Add error handler to profile avatar
+            const profileAvatar = document.getElementById('profile-avatar');
+            profileAvatar.onerror = function() {
+                handleImageError(this);
+            };
+
+            // Function to display skills
+            function displaySkills(skills) {
+                const skillsContainer = document.querySelector('.skills-container');
+                skillsContainer.innerHTML = ''; // Clear existing skills
+
+                if (!skills || skills.length === 0) {
+                    skillsContainer.innerHTML = '<p class="no-skills">No skills added yet.</p>';
+                    return;
+                }
+
+                // Parse skills if it's a string
+                if (typeof skills === 'string') {
+                    try {
+                        skills = JSON.parse(skills);
+                    } catch (e) {
+                        console.error('Error parsing skills:', e);
+                        skills = [];
+                    }
+                }
+
+                skills.forEach(skill => {
+                    const skillElement = document.createElement('div');
+                    skillElement.className = 'achievement-badge';
+                    
+                    // Add verification status if available
+                    const verifiedIcon = skill.verified ? 
+                        '<i class="fas fa-check-circle verified-icon" title="Verified Skill"></i>' : '';
+                    
+                    skillElement.innerHTML = `
+                        <i class="fas fa-code"></i> ${skill.name}
+                        <span class="skill-level">${skill.level || 'Beginner'}</span>
+                        ${verifiedIcon}
+                    `;
+                    skillsContainer.appendChild(skillElement);
+                });
+            }
+
+            // Function to display reviews
+            function displayReviews(reviews) {
+                const reviewsContainer = document.querySelector('.reviews-container');
+                reviewsContainer.innerHTML = ''; // Clear existing reviews
+
+                if (!reviews || !Array.isArray(reviews)) {
+                    reviewsContainer.innerHTML = '<p class="no-reviews">No reviews yet.</p>';
+                    return;
+                }
+
+                if (reviews.length === 0) {
+                    reviewsContainer.innerHTML = '<p class="no-reviews">No reviews yet.</p>';
+                    return;
+                }
+
+                reviews.forEach(review => {
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'review';
+                    
+                    // Get reviewer name and avatar with fallbacks
+                    const reviewerName = review.reviewer_name || 'Anonymous User';
+                    const reviewerAvatar = review.reviewer_avatar || 
+                        `https://ui-avatars.com/api/?name=${encodeURIComponent(reviewerName)}&background=random`;
+                    
+                    // Format the date
+                    const reviewDate = review.created_at ? 
+                        new Date(review.created_at).toLocaleDateString() : 
+                        'Date not available';
+                    
+                    // Create stars based on rating
+                    const rating = review.rating || 0;
+                    const stars = Array(5).fill().map((_, i) => 
+                        `<i class="fas fa-star${i < rating ? '' : '-o'}"></i>`
+                    ).join('');
+                    
+                    reviewElement.innerHTML = `
+                        <div class="review-header">
+                            <img src="${reviewerAvatar}" 
+                                 alt="${reviewerName}" 
+                                 class="review-avatar"
+                                 onerror="this.src='https://ui-avatars.com/api/?name=User&background=random'">
+                            <div class="review-info">
+                                <h3>${reviewerName}</h3>
+                                <div class="stars">
+                                    ${stars}
+                                </div>
+                                <span class="review-date">${reviewDate}</span>
+                            </div>
+                        </div>
+                        <p class="review-text">${review.comment || 'No comment provided'}</p>
+                    `;
+                    reviewsContainer.appendChild(reviewElement);
+                });
+            }
+
+            // Function to display activity
+            function displayActivity(activityLog) {
+                const activityTimeline = document.querySelector('.activity-timeline');
+                activityTimeline.innerHTML = ''; // Clear existing activities
+
+                if (activityLog && typeof activityLog === 'string') {
+                    try {
+                        activityLog = JSON.parse(activityLog);
+                    } catch (e) {
+                        console.error('Error parsing activity log:', e);
+                        return;
+                    }
+                }
+
+                if (Array.isArray(activityLog)) {
+                    activityLog.forEach(activity => {
+                        const activityElement = document.createElement('div');
+                        activityElement.className = 'activity-item';
+                        activityElement.innerHTML = `
+                            <i class="fas fa-${getActivityIcon(activity.type)}"></i>
+                            <div class="activity-content">
+                                <h3>${activity.details}</h3>
+                                <p>${activity.type}</p>
+                                <span class="activity-date">${new Date(activity.timestamp).toLocaleDateString()}</span>
+                            </div>
+                        `;
+                        activityTimeline.appendChild(activityElement);
+                    });
+                }
+            }
+
+            // Helper function to get activity icon
+            function getActivityIcon(type) {
+                const icons = {
+                    'login': 'sign-in-alt',
+                    'tutorial_completed': 'check-circle',
+                    'tutorial_view': 'eye',
+                    'default': 'circle'
+                };
+                return icons[type] || icons.default;
+            }
+
+            // Function to fetch and update profile data
+            async function fetchUserProfile() {
+                try {
+                    const response = await fetch('http://localhost:5000/api/users/profile', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const user = await response.json();
+                    console.log('Received user data:', user);
+
+                    // Update basic profile information
+                    document.getElementById('profile-name').textContent = user.full_name || 'User';
+                    document.getElementById('profile-username').textContent = `@${user.username || 'user'}`;
+                    document.getElementById('profile-email').textContent = user.email || 'No email provided';
+                    document.getElementById('profile-location').textContent = user.location || 'No location provided';
+                    document.getElementById('profile-occupation').textContent = user.occupation || 'No occupation provided';
+                    document.getElementById('profile-bio').textContent = user.bio || 'No bio provided';
+                    document.getElementById('profile-rating').textContent = (user.average_rating || 0).toFixed(1);
+                    document.getElementById('profile-connections').textContent = user.total_reviews || '0';
+
+                    // Update profile picture
+                    if (user.avatar) {
+                        const avatarUrl = user.avatar.startsWith('http') ? user.avatar : `http://localhost:5000${user.avatar}`;
+                        document.getElementById('profile-avatar').src = avatarUrl;
+                    }
+
+                    // Update member since date
+                    if (user.created_at) {
+                        const joinDate = new Date(user.created_at);
+                        document.getElementById('profile-member-since').textContent = joinDate.getFullYear();
+                    }
+
+                    // Display skills - check both verified_skills and skills fields
+                    let skillsToDisplay = [];
+                    if (user.verified_skills) {
+                        try {
+                            skillsToDisplay = typeof user.verified_skills === 'string' ? 
+                                JSON.parse(user.verified_skills) : user.verified_skills;
+                        } catch (e) {
+                            console.error('Error parsing verified_skills:', e);
+                            skillsToDisplay = [];
+                        }
+                    } else if (user.skills) {
+                        try {
+                            skillsToDisplay = typeof user.skills === 'string' ? 
+                                JSON.parse(user.skills) : user.skills;
+                        } catch (e) {
+                            console.error('Error parsing skills:', e);
+                            skillsToDisplay = [];
+                        }
+                    }
+                    
+                    console.log('Skills to display:', skillsToDisplay);
+                    displaySkills(skillsToDisplay);
+
+                    // Display reviews
+                    if (user.reviews) {
+                        try {
+                            const reviews = typeof user.reviews === 'string' ? JSON.parse(user.reviews) : user.reviews;
+                            displayReviews(reviews);
+                        } catch (e) {
+                            console.error('Error parsing reviews:', e);
+                            displayReviews([]);
+                        }
+                    } else {
+                        displayReviews([]);
+                    }
+
+                    // Display activity log
+                    if (user.activity_log) {
+                        try {
+                            const activityLog = typeof user.activity_log === 'string' ? 
+                                JSON.parse(user.activity_log) : user.activity_log;
+                            displayActivity(activityLog);
+                        } catch (e) {
+                            console.error('Error parsing activity log:', e);
+                            displayActivity([]);
+                        }
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching profile:', error);
+                    alert('Error loading profile data. Please try again later.');
+                }
+            }
+
+            // Handle profile picture change button
+            const changePicBtn = document.getElementById('change-pic-btn');
+            changePicBtn.addEventListener('click', () => {
+                window.location.href = 'edit-profile.html';
+            });
+
+            // Initialize profile data
+            fetchUserProfile();
+
+            // Check for profile updates every 5 seconds
+            setInterval(fetchUserProfile, 5000);
+
+            // Initialize tab switching
+            const tabs = document.querySelectorAll('.profile-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    document.querySelectorAll('.profile-tab-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Authentication Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth-init.js"></script>
+    <script src="js/login-guard.js"></script>
+    <script src="js/fixed_merged_main.js"></script>
+  </body>
+</html>

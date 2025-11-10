@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - SkillBridge</title>
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Messages</h2>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search conversations...">
+            </div>
+            <div class="chat-list" id="chat-list">
+                <!-- Chat list will be populated dynamically -->
+            </div>
+        </div>
+
+        <!-- Main chat area -->
+        <div class="main-chat">
+            <div class="chat-header">
+                <div class="avatar" id="chat-avatar">
+                    <!-- Avatar will be populated dynamically -->
+                </div>
+                <div class="chat-header-info">
+                    <h3 id="chat-username">Select a chat</h3>
+                    <span class="chat-status" id="chat-status"></span>
+                    <span class="typing-indicator-header">typing...</span>
+                </div>
+                <div class="chat-actions">
+                    <button class="chat-action-btn" id="new-chat-btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="chat-action-btn" id="menu-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be populated dynamically -->
+            </div>
+
+            <div class="chat-input">
+                <textarea id="message-input" class="message-input" placeholder="Type a message..." rows="1"></textarea>
+                <div class="input-actions">
+                    <button class="input-action-btn" id="emoji-btn">
+                        <i class="far fa-smile"></i>
+                    </button>
+                    <button class="input-action-btn" id="attach-btn">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="input-action-btn" id="voice-btn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="input-action-btn" id="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Chat Modal -->
+    <div id="new-chat-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Chat</h3>
+                <button class="close">&times;</button>
+            </div>
+            <div class="new-chat-user-list" id="new-chat-user-list">
+                <!-- User list will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    
+    <script src="js/login-guard.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/auth.js"></script>
+
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html">
+            Skill<span class="logo-accent">Bridge</span>
+          </a>
+        </div>
+        <div class="main-menu">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+              <a href="#">Surfaces</a>
+              <div class="dropdown-content">
+                <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+                <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+                <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+              </div>
+            </li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+            <li><a href="signup.html" class="btn"><i class="fas fa-user"></i> Sign Up</a></li>
+            <li><a href="login.html" class="btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+          </ul>
+        </div>
+        <button class="hamburger-button">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </button>
+        <div class="sidebar">
+          <div class="sidebar-header">
+            <button type="button" class="close-sidebar">&times;</button>
+          </div>
+          <div class="sidebar-content">
+            <div class="menu-section">
+              <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+              <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+              <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+              <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+              <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+              <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+              <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+              <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+              <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+              <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+            </div>
+            <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+            <div class="menu-section support-section">
+              <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+              <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+              <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+</body>
+</html> 

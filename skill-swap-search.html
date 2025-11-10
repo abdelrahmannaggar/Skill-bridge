@@ -1,0 +1,103 @@
+<script src="js/login-guard.js"></script>
+<script type="module">
+import subscriptionModal from './js/subscription-modal.js';
+
+// Function to check subscription status
+async function checkSubscription() {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'login.html';
+            return false;
+        }
+
+        const response = await fetch('http://localhost:5000/api/subscription-status', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            subscriptionModal.show();
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error checking subscription:', error);
+        return false;
+    }
+}
+
+// Modify the swap skill button click handler
+document.querySelectorAll('.swap-skill-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (await checkSubscription()) {
+            // Proceed with swap request
+            const userId = e.target.dataset.userId;
+            // ... existing swap request code ...
+        }
+    });
+});
+
+// ... rest of your existing code ...
+</script>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">
+      <a href="index.html">
+        Skill<span class="logo-accent">Bridge</span>
+      </a>
+    </div>
+    <div class="main-menu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#">Surfaces</a>
+          <div class="dropdown-content">
+            <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+            <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+            <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+          </div>
+        </li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+        <li><a href="signup.html" class="btn"><i class="fas fa-user"></i> Sign Up</a></li>
+        <li><a href="login.html" class="btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+      </ul>
+    </div>
+    <button class="hamburger-button">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </button>
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <button type="button" class="close-sidebar">&times;</button>
+      </div>
+      <div class="sidebar-content">
+        <div class="menu-section">
+          <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+          <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+          <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+          <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+          <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+          <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+          <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+          <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+          <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+          <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+        </div>
+        <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+        <div class="menu-section support-section">
+          <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+          <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+          <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+          <a href="#" class="signout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav> 

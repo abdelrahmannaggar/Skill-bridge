@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Events | Skill Bridge</title>
+    <link rel="stylesheet" href="css/style22.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .my-events-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .my-events-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .my-events-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .my-events-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .event-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .event-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .event-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .event-description {
+            color: #444;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .no-events i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .back-to-events {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-to-events:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    Skill<span class="logo-accent">Bridge</span>
+                </a>
+            </div>
+            <div class="main-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#">Surfaces</a>
+                        <div class="dropdown-content">
+                            <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+                            <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+                            <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                        </div>
+                    </li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="signup.html" class="btn" id="signup-btn"><i class="fas fa-user"></i> Sign Up</a></li>
+                    <li><a href="login.html" class="btn" id="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+                </ul>
+            </div>
+            <button class="hamburger-button">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </button>
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <button type="button" class="close-sidebar">&times;</button>
+                </div>
+                <div class="sidebar-content">
+                    <div class="menu-section">
+                        <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+                        <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+                        <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+                        <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+                        <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+                        <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                        <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+                        <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    </div>
+                    <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+                    <div class="menu-section support-section">
+                        <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+                        <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                        <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+                        <a href="#" class="signout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="my-events-container">
+        <div class="my-events-header">
+            <h1 class="my-events-title"><i class="fas fa-calendar-check"></i> My Events</h1>
+            <p class="my-events-subtitle">View and manage all the events you've joined</p>
+        </div>
+
+        <div id="events-grid" class="events-grid">
+            <!-- Events will be dynamically loaded here -->
+        </div>
+
+        <div id="no-events" class="no-events" style="display: none;">
+            <i class="fas fa-calendar-times"></i>
+            <h2>No Events Joined Yet</h2>
+            <p>You haven't joined any events yet. Start exploring and join some exciting events!</p>
+            <a href="event.html" class="back-to-events">
+                <i class="fas fa-arrow-left"></i> Browse Events
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Function to load user's joined events
+        async function loadMyEvents() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const response = await fetch('http://localhost:5000/api/my-events', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    throw new Error('Failed to fetch events');
+                }
+
+                const events = await response.json();
+                const eventsGrid = document.getElementById('events-grid');
+                const noEvents = document.getElementById('no-events');
+
+                if (!events || events.length === 0) {
+                    eventsGrid.style.display = 'none';
+                    noEvents.style.display = 'block';
+                    return;
+                }
+
+                eventsGrid.style.display = 'grid';
+                noEvents.style.display = 'none';
+
+                eventsGrid.innerHTML = events.map(event => `
+                    <div class="event-card">
+                        <div class="event-title">
+                            <i class="fas fa-calendar" style="color: var(--accent-color);"></i>
+                            ${event.title}
+                        </div>
+                        <div class="event-meta">
+                            <div class="event-meta-item">
+                                <i class="fas fa-calendar-day"></i>
+                                ${new Date(event.event_date).toLocaleDateString()}
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${event.location || 'Online'}
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-clock"></i>
+                                ${event.time || 'TBA'}
+                            </div>
+                            <div class="event-meta-item">
+                                <i class="fas fa-users"></i>
+                                ${event.category || 'General'}
+                            </div>
+                        </div>
+                        <div class="event-description">${event.description || 'No description available'}</div>
+                        <a href="event-details.html?id=${event.id}" class="btn btn-primary">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </a>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error loading events:', error);
+                const eventsGrid = document.getElementById('events-grid');
+                const noEvents = document.getElementById('no-events');
+                eventsGrid.style.display = 'none';
+                noEvents.style.display = 'block';
+                noEvents.innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h2>Error Loading Events</h2>
+                    <p>There was a problem loading your events. Please try again later.</p>
+                    <a href="event.html" class="back-to-events">
+                        <i class="fas fa-arrow-left"></i> Browse Events
+                    </a>
+                `;
+            }
+        }
+
+        // Function to show toast notifications
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i class="fas ${type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                ${message}
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Load events when page loads
+        document.addEventListener('DOMContentLoaded', loadMyEvents);
+    </script>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/auth-init.js"></script>
+    <script src="js/fixed_merged_main.js"></script>
+    <script src="js/login-guard.js"></script>
+</body>
+</html> 

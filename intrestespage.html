@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Interests</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4338ca;
+            --text: #1e293b;
+            --background: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .search-container {
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        .search-bar {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        #interestSearch {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #interestSearch:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .fa-search {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .interest-card {
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .interest-card:hover {
+            border-color: var(--primary);
+            background: #f8fafc;
+        }
+
+        .interest-card.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html">
+            Skill<span class="logo-accent">Bridge</span>
+          </a>
+        </div>
+        <div class="main-menu">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+              <a href="#">Surfaces</a>
+              <div class="dropdown-content">
+                <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+                <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+                <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+              </div>
+            </li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+            <li><a href="signup.html" class="btn"><i class="fas fa-user"></i> Sign Up</a></li>
+            <li><a href="login.html" class="btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+          </ul>
+        </div>
+        <button class="hamburger-button">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </button>
+        <div class="sidebar">
+          <div class="sidebar-header">
+            <button type="button" class="close-sidebar">&times;</button>
+          </div>
+          <div class="sidebar-content">
+            <div class="menu-section">
+              <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+              <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+              <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+              <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+              <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+              <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+              <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+              <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+              <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+              <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+            </div>
+            <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+            <div class="menu-section support-section">
+              <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+              <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+              <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to Our Community!</h1>
+            <p>Select your interests to get personalized recommendations</p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="interestSearch" placeholder="Search interests...">
+            </div>
+        </div>
+
+        <div class="interests-grid" id="interestsGrid"></div>
+
+        <button class="btn-primary" onclick="completeOnboarding()">Finish Setup</button>
+    </div>
+
+    <script>
+        const interests = [
+            { name: "Web Development", icon: "fa-code" },
+            { name: "Data Science", icon: "fa-database" },
+            { name: "Mobile Development", icon: "fa-mobile" },
+            { name: "Cloud Computing", icon: "fa-cloud" },
+            { name: "AI/Machine Learning", icon: "fa-brain" },
+            { name: "Cybersecurity", icon: "fa-shield-alt" },
+            { name: "UI/UX Design", icon: "fa-palette" },
+            { name: "Digital Marketing", icon: "fa-bullhorn" },
+            { name: "Project Management", icon: "fa-tasks" },
+            { name: "Game Development", icon: "fa-gamepad" },
+            { name: "DevOps", icon: "fa-server" },
+            { name: "Blockchain", icon: "fa-link" }
+        ];
+
+        function populateInterests(filter = '') {
+            const grid = document.getElementById('interestsGrid');
+            grid.innerHTML = '';
+            
+            interests
+                .filter(interest => interest.name.toLowerCase().includes(filter.toLowerCase()))
+                .forEach(interest => {
+                    const card = document.createElement('div');
+                    card.className = 'interest-card';
+                    card.innerHTML = `
+                        <i class="fas ${interest.icon}"></i>
+                        <span>${interest.name}</span>
+                    `;
+                    card.onclick = () => toggleInterest(card, interest.name);
+                    grid.appendChild(card);
+                });
+        }
+
+        function toggleInterest(card, interest) {
+            card.classList.toggle('selected');
+            // Add logic to store selected interests
+        }
+
+        function completeOnboarding() {
+            const selected = document.querySelectorAll('.interest-card.selected');
+            if(selected.length === 0) {
+                alert('Please select at least one interest!');
+                return;
+            }
+            
+            // Add submission logic here
+            alert('Onboarding completed! Redirecting to dashboard...');
+            window.location.href = '/dashboard'; // Change to your actual dashboard URL
+        }
+
+        // Initial population of interests
+        populateInterests();
+
+        // Search functionality
+        document.getElementById('interestSearch').addEventListener('input', (e) => {
+            populateInterests(e.target.value);
+        });
+    </script>
+    <!-- Authentication Scripts -->
+    
+    
+    <script src="js/api.js"></script> 
+    <script src="js/auth.js"></script>
+    <script src="js/auth-init.js"></script>
+    <script src="js/login-guard.js"></script>
+
+    <script src="js/fixed_merged_main.js"></script>
+    
+      
+</body>
+</html>

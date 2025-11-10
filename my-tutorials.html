@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Enrolled Tutorials - SkillBridge</title>
+    <link rel="stylesheet" href="css/style22.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+.ss-user-results .tutorial-card {
+    border-bottom: 1px solid #eee;
+    padding: 16px 0;
+    margin: 0;
+    display: block;
+            position: relative;
+}
+.ss-user-results .tutorial-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.ss-user-results .tutorial-description {
+    color: #555;
+    margin-bottom: 6px;
+}
+.ss-user-results .tutorial-meta {
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 6px;
+}
+        .ss-user-results .tutorial-progress {
+            margin: 8px 0;
+            background: #f0f0f0;
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .ss-user-results .tutorial-progress-bar {
+            height: 100%;
+            background: #1976D2;
+            transition: width 0.3s ease;
+        }
+        .ss-user-results .tutorial-progress-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 4px;
+        }
+        .ss-user-results .tutorial-status {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .ss-user-results .status-in-progress {
+            background: #e3f2fd;
+            color: #1976D2;
+        }
+        .ss-user-results .status-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .ss-user-results .status-not-started {
+            background: #f5f5f5;
+            color: #757575;
+        }
+.ss-user-results .tutorial-actions {
+            margin-top: 12px;
+        }
+        .ss-user-results .tutorial-actions a {
+            margin-right: 12px;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .ss-user-results .continue-btn {
+            background: #1976D2;
+            color: white;
+        }
+        .ss-user-results .view-details-btn {
+            background: #f5f5f5;
+            color: #333;
+        }
+        .ss-user-results .continue-btn:hover {
+            background: #1565C0;
+        }
+        .ss-user-results .view-details-btn:hover {
+            background: #e0e0e0;
+        }
+        .no-tutorials {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .no-tutorials i {
+            font-size: 48px;
+            color: #ccc;
+            margin-bottom: 16px;
+        }
+        .no-tutorials h3 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .no-tutorials p {
+            color: #666;
+            margin-bottom: 16px;
+        }
+        .error-message {
+            text-align: center;
+            padding: 20px;
+            color: #d32f2f;
+        }
+        .error-message i {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .learning-goal-section {
+            background: #f5f7fa;
+            border: 1px solid #e0e0e0;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .learning-goal-section label {
+            font-weight: 500;
+            margin-right: 8px;
+        }
+        .learning-goal-section input[type="number"] {
+            width: 60px;
+            padding: 4px 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 4px;
+        }
+        .learning-goal-section button {
+    background: #1976D2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+        .learning-goal-section button:hover {
+            background: #1565C0;
+        }
+        .learning-goal-section #goalStatus {
+            margin-left: 12px;
+            color: #1976D2;
+    font-size: 0.98rem;
+        }
+        .notification-banner {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 10px 16px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .notification-banner a { color: #1976D2; text-decoration: underline; }
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background: #fff; margin: 5% auto; padding: 24px; border-radius: 8px;
+            width: 90%; max-width: 500px; position: relative;
+        }
+        .close-modal {
+            position: absolute; top: 12px; right: 18px; font-size: 28px; font-weight: bold; color: #888; cursor: pointer;
+        }
+        .close-modal:hover { color: #1976D2; }
+
+        /* Hamburger Menu Styles */
+        .hamburger-button {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1000;
+            margin-left: auto;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .sidebar-content {
+            padding: 20px;
+        }
+
+        .menu-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .menu-section a {
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .menu-section a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .sidebar-section-title {
+            margin: 20px 0 10px;
+            padding: 10px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 992px) {
+            .hamburger-button {
+                display: flex;
+            }
+
+            .main-menu {
+                display: none;
+            }
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .logo-accent {
+            color: #1976D2;
+        }
+
+        .main-menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .main-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .main-menu a:hover {
+            color: #1976D2;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background: #f5f5f5;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background: #1976D2;
+            color: white !important;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background: #1565C0;
+        }
+
+        /* Adjust main content to account for fixed navbar */
+        .ss-skillswap-search-page {
+            margin-top: 80px;
+        }
+</style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+          <div class="logo">
+            <a href="index.html">
+              Skill<span class="logo-accent">Bridge</span>
+            </a>
+          </div>
+          <div class="main-menu">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="#">Surfaces</a>
+                <div class="dropdown-content">
+                  <a href="Skillswapsearchpage.html"><i class="fas fa-laptop"></i>Skill Swap</a>
+                  <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i>Online Tutorial</a>
+                  <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                </div>
+              </li>
+              <li><a href="aboutus.html">About Us</a></li>
+              <li><a href="contactus.html">Contact Us</a></li>
+              <li><a href="signup.html" class="btn" id="signup-btn"><i class="fas fa-user"></i> Sign Up</a></li>
+              <li><a href="login.html" class="btn" id="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+                    <li><a href="#" class="btn" id="signout-btn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+            </ul>
+          </div>
+          <button class="hamburger-button">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </button>
+          <div class="sidebar">
+            <div class="sidebar-header">
+              <button type="button" class="close-sidebar">&times;</button>
+            </div>
+            <div class="sidebar-content">
+              <div class="menu-section">
+                <a href="profilepage.html"><i class="fas fa-user"></i> Personal Details</a>
+                <a href="payment.html"><i class="fas fa-crown"></i> Subscriptions</a>
+                <a href="Skillswapsearchpage.html"><i class="fas fa-exchange-alt"></i> Swap Skill</a>
+                <a href="chatspage.html"><i class="fas fa-envelope"></i> Messages</a>
+                <a href="online-tutorial request.html"><i class="fas fa-chalkboard-teacher"></i> Online Tutorial</a>
+                <a href="my-tutorials.html"><i class="fas fa-chalkboard-teacher"></i> My Tutorials</a>
+                <a href="event.html"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+                <a href="my-events.html"><i class="fas fa-calendar-check"></i> My Events</a>
+                <a href="Skillswap.html" role="button"><i class="fas fa-history"></i> Skills SwapHistory</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+              </div>
+              <div class="sidebar-section-title">Privacy Policy-Terms of Service</div>
+              <div class="menu-section support-section">
+                <a href="#" role="button"><i class="fas fa-question-circle"></i> Help & Feedback</a>
+                <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                <a href="signup.html" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+                <a href="#" class="signout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <main class="ss-skillswap-search-page">
+        <div class="ss-container">
+            <!-- Reminder System UI -->
+            <div id="learning-goal-section" class="learning-goal-section">
+                <label for="learningGoalInput">Set your weekly learning goal:</label>
+                <input type="number" id="learningGoalInput" min="1" max="20" value="3">
+                <span>modules/week</span>
+                <button onclick="saveLearningGoal()">Save</button>
+                <div id="goalStatus"></div>
+            </div>
+            <div id="incomplete-tutorials-notification" class="notification-banner" style="display:none;"></div>
+            <div id="upcoming-deadlines-notification" class="notification-banner" style="display:none;"></div>
+            <div id="new-content-notification" class="notification-banner" style="display:none;"></div>
+            <h1>My Enrolled Tutorials</h1>
+            <div id="myTutorialsList" class="ss-user-results">
+                <!-- Enrolled tutorials will be loaded here -->
+            </div>
+            <div id="loading" class="ss-loading" style="display:none;">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+        </div>
+    </main>
+
+    <div id="tutorialDetailsModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeTutorialDetailsModal()">&times;</span>
+            <div id="tutorialDetailsContent">
+                <!-- Tutorial details will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/api.js"></script> 
+    <script src="js/auth.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEnrolledTutorials();
+            updateAuthNav();
+            const signoutBtn = document.getElementById('signout-btn');
+            if (signoutBtn) {
+                signoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('token');
+                    window.location.href = 'login.html';
+                });
+            }
+
+            // Hamburger menu functionality
+            const hamburgerButton = document.querySelector('.hamburger-button');
+            const sidebar = document.querySelector('.sidebar');
+            const closeSidebarButton = document.querySelector('.close-sidebar');
+
+            hamburgerButton.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+
+            closeSidebarButton.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', function(event) {
+                if (sidebar.classList.contains('active') && 
+                    !sidebar.contains(event.target) && 
+                    !hamburgerButton.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        async function loadEnrolledTutorials() {
+            const tutorialsList = document.getElementById('myTutorialsList');
+            const loadingElement = document.getElementById('loading');
+            
+            try {
+                loadingElement.style.display = 'block';
+                tutorialsList.innerHTML = '';
+
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const response = await fetch('http://localhost:5000/api/my-tutorials', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch enrolled tutorials');
+                }
+
+                const tutorials = await response.json();
+                
+                // Reminder System notifications
+                showIncompleteTutorialsNotification(tutorials);
+                showUpcomingDeadlines(tutorials);
+                showNewContentNotification(tutorials);
+                checkLearningGoalProgress(tutorials);
+                
+                if (tutorials.length === 0) {
+                    tutorialsList.innerHTML = `
+                        <div class="no-tutorials">
+                            <i class="fas fa-book-open"></i>
+                            <h3>No Enrolled Tutorials</h3>
+                            <p>You haven't enrolled in any tutorials yet.</p>
+                            <a href="online-tutorial request.html" class="primary-btn">
+                                <i class="fas fa-search"></i>
+                                Browse Tutorials
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                tutorials.forEach(tutorial => {
+                    tutorialsList.innerHTML += createTutorialCard(tutorial);
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                tutorialsList.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Error loading tutorials. Please try again later.</p>
+                    </div>
+                `;
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
+
+        function createTutorialCard(tutorial) {
+            const progress = tutorial.progress || 0;
+            let statusClass = 'status-not-started';
+            let statusText = 'Not Started';
+
+            if (progress > 0 && progress < 100) {
+                statusClass = 'status-in-progress';
+                statusText = 'In Progress';
+            } else if (progress === 100) {
+                statusClass = 'status-completed';
+                statusText = 'Completed';
+            }
+
+            return `
+                <div class="tutorial-card" data-tutorial-id="${tutorial.id}">
+                    <div class="tutorial-content">
+                        <div class="tutorial-title">${tutorial.title}</div>
+                        <div class="tutorial-description">${tutorial.description || 'No description available.'}</div>
+                        <div class="tutorial-meta">
+                            Duration: ${tutorial.duration || 'Not specified'} | 
+                            Instructor: ${tutorial.instructor_name || tutorial.instructor || 'Not specified'} | 
+                            Rating: ${tutorial.rating || '0'}
+                        </div>
+                        <div class="tutorial-progress">
+                            <div class="tutorial-progress-bar" style="width: ${progress}%"></div>
+                        </div>
+                        <div class="tutorial-progress-text">
+                            ${progress}% Complete
+                        </div>
+                        <span class="tutorial-status ${statusClass}">${statusText}</span>
+                        <div class="tutorial-actions">
+                            <a href="tutorial-content.html?id=${tutorial.id}" class="continue-btn">
+                                ${progress > 0 ? 'Continue Learning' : 'Start Learning'}
+                            </a>
+                            <a href="javascript:void(0);" class="view-details-btn" onclick="showTutorialDetails(${tutorial.id})">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function saveLearningGoal() {
+            const goal = document.getElementById('learningGoalInput').value;
+            localStorage.setItem('learningGoal', goal);
+            document.getElementById('goalStatus').innerText = `Goal saved: ${goal} modules/week`;
+        }
+        function loadLearningGoal() {
+            const goal = localStorage.getItem('learningGoal') || 3;
+            document.getElementById('learningGoalInput').value = goal;
+            document.getElementById('goalStatus').innerText = `Current goal: ${goal} modules/week`;
+        }
+        document.addEventListener('DOMContentLoaded', loadLearningGoal);
+
+        function showIncompleteTutorialsNotification(tutorials) {
+            const hasIncomplete = tutorials.some(t => (t.progress || 0) < 100);
+            const banner = document.getElementById('incomplete-tutorials-notification');
+            if (hasIncomplete) {
+                banner.innerHTML = `<i class='fas fa-exclamation-circle'></i> You have incomplete tutorials! <a href='#myTutorialsList'>Continue learning</a>`;
+                banner.style.display = 'flex';
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+        function showUpcomingDeadlines(tutorials) {
+            const now = new Date();
+            const soon = tutorials.filter(t => t.deadline && (new Date(t.deadline) - now) < 3 * 24 * 60 * 60 * 1000 && (t.progress || 0) < 100);
+            const banner = document.getElementById('upcoming-deadlines-notification');
+            if (soon.length > 0) {
+                banner.innerHTML = `<i class='fas fa-calendar-alt'></i> Upcoming deadline: <b>${soon[0].title}</b> on ${soon[0].deadline}`;
+                banner.style.display = 'flex';
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+        function showNewContentNotification(tutorials) {
+            const lastVisit = localStorage.getItem('lastVisit') || new Date(0);
+            const newContent = tutorials.filter(t => t.lastUpdated && new Date(t.lastUpdated) > new Date(lastVisit));
+            const banner = document.getElementById('new-content-notification');
+            if (newContent.length > 0) {
+                banner.innerHTML = `<i class='fas fa-bell'></i> New content added to <b>${newContent[0].title}</b>!`;
+                banner.style.display = 'flex';
+            } else {
+                banner.style.display = 'none';
+            }
+            localStorage.setItem('lastVisit', new Date().toISOString());
+        }
+        function checkLearningGoalProgress(tutorials) {
+            const goal = parseInt(localStorage.getItem('learningGoal') || '3', 10);
+            // Count completed modules this week (simulate with completed tutorials for MVP)
+            const now = new Date();
+            const weekAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+            // If you have module completion dates, use them. For MVP, use completed tutorials.
+            const completedThisWeek = tutorials.filter(t => t.progress === 100 /* && new Date(t.completedAt) >= weekAgo */).length;
+            const status = document.getElementById('goalStatus');
+            if (completedThisWeek >= goal) {
+                status.innerText = `🎉 Goal achieved! (${completedThisWeek}/${goal} modules completed this week)`;
+            } else {
+                status.innerText = `Progress: ${completedThisWeek}/${goal} modules this week`;
+            }
+        }
+
+        async function showTutorialDetails(tutorialId) {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+            const modal = document.getElementById('tutorialDetailsModal');
+            const content = document.getElementById('tutorialDetailsContent');
+            content.innerHTML = '<div style="text-align:center;"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+            modal.style.display = 'block';
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/tutorials/${tutorialId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error('Failed to fetch tutorial details');
+                const tutorial = await response.json();
+                content.innerHTML = `
+                    <h2>${tutorial.title}</h2>
+                    <p><strong>Description:</strong> ${tutorial.description || 'No description.'}</p>
+                    <p><strong>Instructor:</strong> ${tutorial.instructor_name || tutorial.instructor || 'N/A'}</p>
+                    <p><strong>Level:</strong> ${tutorial.level || 'N/A'}</p>
+                    <p><strong>Category:</strong> ${tutorial.category || 'N/A'}</p>
+                    <p><strong>Duration:</strong> ${tutorial.duration || 'N/A'}</p>
+                    <p><strong>Rating:</strong> ${tutorial.rating || 'N/A'}</p>
+                    <p><strong>Students:</strong> ${tutorial.students || 'N/A'}</p>
+                `;
+            } catch (error) {
+                content.innerHTML = `<div style="color:#d32f2f;">Error loading details. Please try again later.</div>`;
+            }
+        }
+
+        function closeTutorialDetailsModal() {
+            document.getElementById('tutorialDetailsModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('tutorialDetailsModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function updateAuthNav() {
+            const token = localStorage.getItem('token');
+            const loginBtn = document.getElementById('login-btn');
+            const signupBtn = document.getElementById('signup-btn');
+            const signoutBtn = document.getElementById('signout-btn');
+
+            if (token) {
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (signupBtn) signupBtn.style.display = 'none';
+                if (signoutBtn) signoutBtn.style.display = '';
+            } else {
+                if (loginBtn) loginBtn.style.display = '';
+                if (signupBtn) signupBtn.style.display = '';
+                if (signoutBtn) signoutBtn.style.display = 'none';
+            }
+        }
+   </script>
+</body>
+</html> 
